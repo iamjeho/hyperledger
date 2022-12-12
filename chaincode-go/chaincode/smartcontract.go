@@ -2,7 +2,7 @@ package chaincode
 
 import (
 	"encoding/json"
-	"fmt"
+	//"fmt"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
 )
@@ -21,7 +21,7 @@ type Asset struct {
 
 }
 
-// InitLedger adds a base set of assets to the ledger
+/* // InitLedger adds a base set of assets to the ledger
 func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) error {
 	assets := []Asset{
 //		{Count:Candidate:"1", Location: "원천동주민센터", Time: "2022-12-10-10:00"},
@@ -40,13 +40,13 @@ func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) 
 //	}
 
 	return nil
-}
+} */
 
 
 // CreateAsset issues a new asset to the world state with given details.
 func (s *SmartContract) CreateAsset(ctx contractapi.TransactionContextInterface, count int, candidate string, location string, time string) error {
 	asset := Asset{
-		Count				count,
+		Count:			count,
 		Candidate:         candidate,
 		Location:       location,
 		Time:	 time,
@@ -56,7 +56,7 @@ func (s *SmartContract) CreateAsset(ctx contractapi.TransactionContextInterface,
 		return err
 	}
 
-	return ctx.GetStub().PutState(count, assetJSON)
+	return ctx.GetStub().PutState(string(count), assetJSON)
 }
 
 // ReadAsset returns the asset stored in the world state with given candidate.
